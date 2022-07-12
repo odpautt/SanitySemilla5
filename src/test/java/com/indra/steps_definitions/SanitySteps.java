@@ -44,7 +44,7 @@ public class SanitySteps{
     ReconnectionActions reconnectionActions = new ReconnectionActions(driver);
     PortabilityPrepaidActions portabilityPrepaidActions = new PortabilityPrepaidActions(driver);
     PortabilityPostActivationActions portabilityPostActivationActions = new PortabilityPostActivationActions(driver);
-
+    PagoEquiposActions pagoEquiposActions = new PagoEquiposActions(driver);
 //-----------<Primer escenario>----------------
     @Given("^Se ejecutan procedimientos en bd y soapUi$")
     public void seEjecutanProcedimientosEnBdYSoapUi() throws SQLException {
@@ -115,6 +115,10 @@ public class SanitySteps{
     @Then("^Se deberia ver en pantalla unica la linea activa en prepago$")
     public void seDeberiaVerEnPantallaUnicaLaLineaActivaEnPrepago() {
         prepaidActivationActions.consultSingleScreen(dataExcelModels.getMsisdnPrepago());
+        //legalizacion del pedido
+        pagoEquiposActions.rutaInicial();
+        pagoEquiposActions.pagarEquipo(dataExcelModels.getCedulaClientePrepago(),dataExcelModels.getMsisdnPrepago());
+
     }
 
     //-----------<Quinto escenario>----------------
@@ -131,6 +135,10 @@ public class SanitySteps{
     @Then("^Se deberia ver en pantalla unica la linea activa nintendo$")
     public void seDeberiaVerEnPantallaUnicaLaLineaActivaNintendo() {
         controlActivationActions.consultSingleScreen(dataExcelModels.getMsisdnPostpago());
+
+        //legalizacion del pedido
+        pagoEquiposActions.rutaInicial();
+        pagoEquiposActions.pagarEquipo(dataExcelModels.getCedulaClientePostpago(),dataExcelModels.getMsisdnPostpago());
     }
 
     //-----------<Sexto escenario>----------------
@@ -144,6 +152,11 @@ public class SanitySteps{
     @Then("^Se deberia ver en pantalla unica la linea cedida pre$")
     public void seDeberiaVerEnPantallaUnicaLaLineaCedidaPre() {
         prepaidActivationActions.consultSingleScreen2(dataExcelModels.getMsisdnPrepago());
+
+        //legalizacion del pedido
+        pagoEquiposActions.rutaInicial();
+        pagoEquiposActions.pagarEquipo(dataExcelModels.getCedulaClientePostpago(),dataExcelModels.getMsisdnPrepago());
+
     }
 
     //-----------<Septimo escenario>----------------
@@ -157,6 +170,10 @@ public class SanitySteps{
     @Then("^Se deberia ver en pantalla unica la linea cedida pos$")
     public void seDeberiaVerEnPantallaUnicaLaLineaCedidaPos() {
         prepaidActivationActions.consultSingleScreen2(dataExcelModels.getMsisdnPostpago());
+
+        //legalizacion del pedido
+        pagoEquiposActions.rutaInicial();
+        pagoEquiposActions.pagarEquipo(dataExcelModels.getCedulaClientePrepago(),dataExcelModels.getMsisdnPostpago());
     }
 
     //-----------<Octavo escenario>----------------
@@ -173,6 +190,10 @@ public class SanitySteps{
     @Then("^Se deberia ver en pantalla unica la linea activa avanger$")
     public void seDeberiaVerEnPantallaUnicaLaLineaActivaAvanger() {
         avangerActions.consultSingleScreen(dataExcelModels.getMsisdnAvanger());
+
+        //legalizacion del pedido
+        pagoEquiposActions.rutaInicial();
+        pagoEquiposActions.pagarEquipo(dataExcelModels.getCedulaClienteAvanger(),dataExcelModels.getMsisdnAvanger());
     }
 
     //-----------<Noveno escenario>----------------
